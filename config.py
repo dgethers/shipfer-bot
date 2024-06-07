@@ -4,9 +4,18 @@
 
 import os
 
+from dotenv import load_dotenv
+
+
 class DefaultConfig:
     """ Bot Configuration """
+
+    load_dotenv()
 
     PORT = 3978
     APP_ID = os.environ.get("MicrosoftAppId", "")
     APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "")
+    LS_CONVERSATIONS_ENDPOINT = os.environ.get("LS_CONVERSATIONS_ENDPOINT", "")
+    LS_CONVERSATIONS_KEY = os.environ.get("LS_CONVERSATIONS_KEY", "")
+    LS_REGION = os.environ.get("LS_REGION", "")
+

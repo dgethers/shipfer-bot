@@ -20,7 +20,8 @@ class LanguageConversationAnalyzer:
         print(f'language_service_key -> {language_service_key}')
         self.languageServiceClient = ConversationAnalysisClient(language_service_endpoint, AzureKeyCredential(language_service_key))
 
-    def analyze_text(self, text: str):
+    # todo: create enum for intent types
+    def get_intent(self, text: str) -> str:
         with self.languageServiceClient:
             result = self.languageServiceClient.analyze_conversation(
                 task={
@@ -44,27 +45,29 @@ class LanguageConversationAnalyzer:
             )
 
         print("query: {}".format(result["result"]["query"]))
-        print("project kind: {}\n".format(result["result"]["prediction"]["projectKind"]))
+        # print("project kind: {}\n".format(result["result"]["prediction"]["projectKind"]))
 
         print("top intent: {}".format(result["result"]["prediction"]["topIntent"]))
-        print("category: {}".format(result["result"]["prediction"]["intents"][0]["category"]))
+        # print("category: {}".format(result["result"]["prediction"]["intents"][0]["category"]))
         print("confidence score: {}\n".format(result["result"]["prediction"]["intents"][0]["confidenceScore"]))
 
-        print("entities:")
-        for entity in result["result"]["prediction"]["entities"]:
-            print("\ncategory: {}".format(entity["category"]))
-            print("text: {}".format(entity["text"]))
-            print("confidence score: {}".format(entity["confidenceScore"]))
-            if "resolutions" in entity:
-                print("resolutions")
-                for resolution in entity["resolutions"]:
-                    print("kind: {}".format(resolution["resolutionKind"]))
-                    print("value: {}".format(resolution["value"]))
-            if "extraInformation" in entity:
-                print("extra info")
-                for data in entity["extraInformation"]:
-                    print("kind: {}".format(data["extraInformationKind"]))
-                    if data["extraInformationKind"] == "ListKey":
-                        print("key: {}".format(data["key"]))
-                    if data["extraInformationKind"] == "EntitySubtype":
-                        print("value: {}".format(data["value"]))
+        return result["result"]["prediction"]["topIntent"]
+
+        # print("entities:")
+        # for entity in result["result"]["prediction"]["entities"]:
+        #     print("\ncategory: {}".format(entity["category"]))
+        #     print("text: {}".format(entity["text"]))
+        #     print("confidence score: {}".format(entity["confidenceScore"]))
+        #     if "resolutions" in entity:
+        #         print("resolutions")
+        #         for resolution in entity["resolutions"]:
+        #             print("kind: {}".format(resolution["resolutionKind"]))
+        #             print("value: {}".format(resolution["value"]))
+        #     if "extraInformation" in entity:
+        #         print("extra info")
+        #         for data in entity["extraInformation"]:
+        #             print("kind: {}".format(data["extraInformationKind"]))
+        #             if data["extraInformationKind"] == "ListKey":
+        #                 print("key: {}".format(data["key"]))
+        #             if data["extraInformationKind"] == "EntitySubtype":
+        #                 print("value: {}".format(data["value"]))

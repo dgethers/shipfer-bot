@@ -6,14 +6,25 @@ from botbuilder.schema import ChannelAccount
 
 import config
 from language_conversation_analyzer import LanguageConversationAnalyzer
+from pb_shipment import PitneyBowesShipmentProcessor
 
 
 class MyBot(ActivityHandler):
     # See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
 
+    # todo: create larger workflow with multi-turn conversation
     async def on_message_activity(self, turn_context: TurnContext):
         lca = LanguageConversationAnalyzer(config.DefaultConfig.LS_CONVERSATIONS_ENDPOINT, config.DefaultConfig.LS_CONVERSATIONS_KEY)
-        lca.analyze_text(turn_context.activity.text)
+        pbs = PitneyBowesShipmentProcessor(config.DefaultConfig.PB_CLIENT_ID, config.DefaultConfig.PB_CLIENT_SECRET)
+        intent = lca.get_intent(turn_context.activity.text)
+        print(f'found intent: {intent}')
+        shipments = None
+
+        if intent == 'ListShipments':
+            shipments = pbs.get_shipments()
+
+        print(f'shipments -> {shipments}')
+
         await turn_context.send_activity(f"You said '{ turn_context.activity.text }'")
 
     async def on_members_added_activity(

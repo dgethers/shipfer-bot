@@ -18,4 +18,7 @@ class DefaultConfig:
     LS_CONVERSATIONS_ENDPOINT = os.environ.get("LS_CONVERSATIONS_ENDPOINT", "")
     LS_CONVERSATIONS_KEY = os.environ.get("LS_CONVERSATIONS_KEY", "")
     LS_REGION = os.environ.get("LS_REGION", "")
+    PB_CLIENT_ID = os.environ.get("PB_CLIENT_ID", "")
+    PB_CLIENT_SECRET = os.environ.get("PB_CLIENT_SECRET", "")
+
 

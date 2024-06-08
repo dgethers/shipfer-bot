@@ -4,7 +4,7 @@ import base64
 
 
 class PitneyBowesShipmentProcessor:
-    shipment_url = 'https://api-sandbox.sendpro360.pitneybowes.com/shipping/api/v1/services'
+    shipment_url = 'https://api-sandbox.sendpro360.pitneybowes.com/shipping/api/v1/shipments'
     token_url = "https://api-sandbox.sendpro360.pitneybowes.com/auth/api/v1/token"
 
     # todo: extract token to central point when more processors are created

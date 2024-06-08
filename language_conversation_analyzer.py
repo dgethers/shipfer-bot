@@ -2,23 +2,14 @@
 import os
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.language.conversations import ConversationAnalysisClient
-from dotenv import load_dotenv
 
-
-# get secrets
-# todo: get secrets from config file
-# clu_endpoint = os.environ["LS_CONVERSATIONS_ENDPOINT"]
-# clu_key = os.environ["LS_CONVERSATIONS_KEY"]
-
-
-# project_name = os.environ["AZURE_CONVERSATIONS_PROJECT_NAME"]
-# deployment_name = os.environ["AZURE_CONVERSATIONS_DEPLOYMENT_NAME"]
 
 class LanguageConversationAnalyzer:
     def __init__(self, language_service_endpoint: str, language_service_key: str):
-        print(f'langeuage_service_endpoint -> {language_service_endpoint}')
+        print(f'language_service_endpoint -> {language_service_endpoint}')
         print(f'language_service_key -> {language_service_key}')
-        self.languageServiceClient = ConversationAnalysisClient(language_service_endpoint, AzureKeyCredential(language_service_key))
+        self.languageServiceClient = ConversationAnalysisClient(language_service_endpoint,
+                                                                AzureKeyCredential(language_service_key))
 
     # todo: create enum for intent types
     def get_intent(self, text: str) -> str:

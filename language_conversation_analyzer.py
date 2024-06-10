@@ -11,7 +11,7 @@ class LanguageConversationAnalyzer:
         self.languageServiceClient = ConversationAnalysisClient(language_service_endpoint,
                                                                 AzureKeyCredential(language_service_key))
 
-    # todo: create enum for intent types
+# todo: create env property for deploymentName
     def get_intent(self, text: str) -> str:
         with self.languageServiceClient:
             result = self.languageServiceClient.analyze_conversation(
@@ -29,7 +29,7 @@ class LanguageConversationAnalyzer:
                     },
                     "parameters": {
                         "projectName": "Shipfer-bot-language",
-                        "deploymentName": "v0.6",
+                        "deploymentName": "v0.8",
                         "verbose": True
                     }
                 }

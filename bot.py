@@ -12,11 +12,12 @@ from botbuilder.core import (
     MessageFactory,
 )
 
-from data_models import ShipmentQuestions, ShipmentQuestionAnswers
+from data_models import ShipmentQuestions, ShipmentQuestionAnswers, ShipmentConversationalFlow, Intents
 
 import config
 from language_conversation_analyzer import LanguageConversationAnalyzer
 from pb_shipment import PitneyBowesShipmentProcessor
+
 
 # todo: rename bot
 class MyBot(ActivityHandler):
@@ -34,23 +35,23 @@ class MyBot(ActivityHandler):
                 "[CustomPromptBot]: Missing parameter. user_state is required but None was given"
             )
 
-        self.user_state = user_state
-        self.conversation_state = conversation_state
         self.language_conversation_analyzer = language_conversation_analyzer
         self.shipment_processor = shipment_processor
-
+        self.flow_accessor = conversation_state.create_property("ConversationFlow")
+        self.user_shipment_question_accessor = user_state.create_property('ShipmentQuestionFlow')
 
     # todo: create larger workflow with multi-turn conversation
     async def on_message_activity(self, turn_context: TurnContext):
         intent = self.language_conversation_analyzer.get_intent(turn_context.activity.text)
         print(f'Intent: {intent}')
-        shipments = None
 
-        if intent == 'ListShipments':
+        flow = await self.flow_accessor.get(turn_context, ShipmentConversationalFlow)
+        user_shipment_questions = await self.user_shipment_question_accessor.get(turn_context, ShipmentQuestionAnswers)
+
+        if intent == Intents.SEARCH_ALL_SHIPMENTS:
             shipments = self.shipment_processor.get_shipments()
-        print(f'shipments -> {shipments}')
-
-        await turn_context.send_activity(str(shipments))
+            print(f'shipments -> {shipments}')
+            await turn_context.send_activity(str(shipments))
 
     async def on_members_added_activity(
             self,

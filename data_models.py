@@ -1,5 +1,5 @@
 from datetime import datetime
-from enum import Enum
+from enum import Enum, StrEnum
 
 
 class ShipmentQuestions(Enum):
@@ -7,6 +7,13 @@ class ShipmentQuestions(Enum):
     END_DATE = 2
     RESULT_SIZE = 3
     NONE = 4
+
+
+class Intents(StrEnum):
+    CREATE_SHIPMENTS = 'CreateShipments',
+    SEARCH_ALL_SHIPMENTS = 'SearchAllShipments',
+    SEARCH_SHIPMENTS = 'SearchShipments',
+    SHIPMENT_INFO = 'ShipmentInfo',
 
 
 class ShipmentConversationalFlow:

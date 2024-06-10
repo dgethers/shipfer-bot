@@ -26,3 +26,6 @@ class ShipmentQuestionAnswers:
         self.start_date = start_date
         self.end_date = end_date
         self.result_size = result_size
+
+    def __str__(self):
+        return f'Start Date: {self.start_date}, End Date: {self.end_date}, Result Size: {self.result_size}'

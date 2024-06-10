@@ -13,8 +13,10 @@ class PitneyBowesShipmentProcessor:
         self.client_id = client_id
         self.client_secret = client_secret
 
-    # todo: use parameters
+    # todo: use parameters / split into seperate methods for ease
     def get_shipments(self, start_date: datetime = None, end_date: datetime = None, page: int = None, size: int = None):
+        if start_date and end_date and size:
+            return "my filtered shipments"
         access_token = self.get_access_token()
 
         headers = {

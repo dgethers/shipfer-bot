@@ -61,7 +61,7 @@ class MyBot(ActivityHandler):
                 print(f'shipments -> {shipments}')
                 await turn_context.send_activity(str(shipments))
             elif intent == Intents.SEARCH_SHIPMENTS:
-                # self.question_ask_flow = True
+                self.question_ask_flow = True
                 await self._ask_shipment_questions(flow, user_shipment_questions, turn_context)
                 print(f'user_shipment_questions -> {str(user_shipment_questions)}')
         else:

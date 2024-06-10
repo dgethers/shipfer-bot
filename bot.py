@@ -4,26 +4,50 @@
 from botbuilder.core import ActivityHandler, TurnContext
 from botbuilder.schema import ChannelAccount
 
+from botbuilder.core import (
+    ActivityHandler,
+    ConversationState,
+    TurnContext,
+    UserState,
+    MessageFactory,
+)
+
+from data_models import ShipmentQuestions, ShipmentQuestionAnswers
+
 import config
 from language_conversation_analyzer import LanguageConversationAnalyzer
 from pb_shipment import PitneyBowesShipmentProcessor
 
-
+# todo: rename bot
 class MyBot(ActivityHandler):
     # See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
 
+    def __init__(self, user_state: UserState, conversation_state: ConversationState,
+                 language_conversation_analyzer: LanguageConversationAnalyzer,
+                 shipment_processor: PitneyBowesShipmentProcessor):
+        if conversation_state is None:
+            raise TypeError(
+                "[CustomPromptBot]: Missing parameter. conversation_state is required but None was given"
+            )
+        if user_state is None:
+            raise TypeError(
+                "[CustomPromptBot]: Missing parameter. user_state is required but None was given"
+            )
+
+        self.user_state = user_state
+        self.conversation_state = conversation_state
+        self.language_conversation_analyzer = language_conversation_analyzer
+        self.shipment_processor = shipment_processor
+
+
     # todo: create larger workflow with multi-turn conversation
     async def on_message_activity(self, turn_context: TurnContext):
-        # todo: redo dependency
-        lca = LanguageConversationAnalyzer(config.DefaultConfig.LS_CONVERSATIONS_ENDPOINT,
-                                           config.DefaultConfig.LS_CONVERSATIONS_KEY)
-        pbs = PitneyBowesShipmentProcessor(config.DefaultConfig.PB_CLIENT_ID, config.DefaultConfig.PB_CLIENT_SECRET)
-        intent = lca.get_intent(turn_context.activity.text)
+        intent = self.language_conversation_analyzer.get_intent(turn_context.activity.text)
         print(f'Intent: {intent}')
         shipments = None
 
         if intent == 'ListShipments':
-            shipments = pbs.get_shipments()
+            shipments = self.shipment_processor.get_shipments()
         print(f'shipments -> {shipments}')
 
         await turn_context.send_activity(str(shipments))

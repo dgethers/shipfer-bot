@@ -10,13 +10,16 @@ from aiohttp.web import Request, Response, json_response
 from botbuilder.core import (
     BotFrameworkAdapterSettings,
     TurnContext,
-    BotFrameworkAdapter,
+    BotFrameworkAdapter, MemoryStorage, UserState, ConversationState,
 )
 from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes
 
+import config
 from bot import MyBot
 from config import DefaultConfig
+from language_conversation_analyzer import LanguageConversationAnalyzer
+from pb_shipment import PitneyBowesShipmentProcessor
 
 CONFIG = DefaultConfig()
 
@@ -56,8 +59,18 @@ async def on_error(context: TurnContext, error: Exception):
 
 ADAPTER.on_turn_error = on_error
 
+# Setup memory
+MEMORY = MemoryStorage()
+USER_STATE = UserState(MEMORY)
+CONVERSATION_STATE = ConversationState(MEMORY)
+
+# todo: rename these?
+lca = LanguageConversationAnalyzer(config.DefaultConfig.LS_CONVERSATIONS_ENDPOINT,
+                                   config.DefaultConfig.LS_CONVERSATIONS_KEY)
+pbs = PitneyBowesShipmentProcessor(config.DefaultConfig.PB_CLIENT_ID, config.DefaultConfig.PB_CLIENT_SECRET)
+
 # Create the Bot
-BOT = MyBot()
+BOT = MyBot(USER_STATE, CONVERSATION_STATE , lca, pbs)
 
 
 # Listen for incoming requests on /api/messages

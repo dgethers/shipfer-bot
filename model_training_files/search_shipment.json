@@ -1,0 +1,107 @@
+[
+  {
+    "text": "Show me my shipments starting from a date",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Can you retrieve my shipments from a date?",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "I need shipment details starting at a date",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Retrieve shipments ending on a date",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Show my shipments ending on a date",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Can you list my shipments starting or ending on a date?",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "I'd like details on my shipments ending between two dates",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Can you show my shipments starting from and ending on a specific date?",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Retrieve shipments starting from and ending on a date",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Show my shipments starting from and ending on a date",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "What shipments do I have starting from and ending on a date?",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Please show me my shipments starting from and ending on a date",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Can you list my shipments starting from and ending on a date?",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "I'd like details on my shipments starting from and ending on a date",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Can you show my shipments ending on and starting from a date?",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Retrieve shipments ending on and starting from a date",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Show my shipments ending on and starting from a date",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "What shipments do I have ending on and starting from a date?",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Please show me my shipments ending on and starting from a date",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "Can you list my shipments ending on and starting from a date?",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  },
+  {
+    "text": "I'd like details on my shipments ending on and starting from a date",
+    "language": "en-us",
+    "intent": "SearchShipments"
+  }
+]

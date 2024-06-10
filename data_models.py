@@ -1,0 +1,21 @@
+from datetime import datetime
+from enum import Enum
+
+
+class ShipmentQuestions(Enum):
+    START_DATE = 1
+    END_DATE = 2
+    RESULT_SIZE = 3
+    NONE = 4
+
+
+class ShipmentConversationalFlow:
+    def __init__(self, last_question_asked: ShipmentQuestions = ShipmentQuestions.NONE):
+        self.last_question_asked = last_question_asked
+
+
+class ShipmentQuestionAnswers:
+    def __init__(self, start_date: datetime = None, end_date: datetime = None, result_size: int = 0):
+        self.start_date = start_date
+        self.end_date = end_date
+        self.result_size = result_size

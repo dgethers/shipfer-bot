@@ -11,7 +11,7 @@ class ShipmentQuestions(Enum):
 
 class Intents(StrEnum):
     CREATE_SHIPMENTS = 'CreateShipments',
-    SEARCH_ALL_SHIPMENTS = 'SearchAllShipments',
+    SEARCH_ALL_SHIPMENTS = 'ViewAllShipments',
     SEARCH_SHIPMENTS = 'SearchShipments',
     SHIPMENT_INFO = 'ShipmentInfo',
 

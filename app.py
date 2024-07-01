@@ -16,7 +16,7 @@ from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes
 
 import config
-from bot import MyBot
+from bot import ShipmentInfoBot
 from config import DefaultConfig
 from language_conversation_analyzer import LanguageConversationAnalyzer
 from pb_shipment import PitneyBowesShipmentProcessor
@@ -70,7 +70,7 @@ lca = LanguageConversationAnalyzer(config.DefaultConfig.LS_CONVERSATIONS_ENDPOIN
 pbs = PitneyBowesShipmentProcessor(config.DefaultConfig.PB_CLIENT_ID, config.DefaultConfig.PB_CLIENT_SECRET)
 
 # Create the Bot
-BOT = MyBot(USER_STATE, CONVERSATION_STATE , lca, pbs)
+BOT = ShipmentInfoBot(USER_STATE, CONVERSATION_STATE, lca, pbs)
 
 
 # Listen for incoming requests on /api/messages

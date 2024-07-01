@@ -30,7 +30,7 @@ class LanguageConversationAnalyzer:
                     },
                     "parameters": {
                         "projectName": "shipfer-language-cognition",
-                        "deploymentName": "v.01",
+                        "deploymentName": "v.03",
                         "verbose": True
                     }
                 }

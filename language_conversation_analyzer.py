@@ -11,7 +11,8 @@ class LanguageConversationAnalyzer:
         self.languageServiceClient = ConversationAnalysisClient(language_service_endpoint,
                                                                 AzureKeyCredential(language_service_key))
 
-# todo: create env property for deploymentName
+# todo: create env property for deploymentName, and projectName
+# todo: set threshold for confidence
     def get_intent(self, text: str) -> str:
         with self.languageServiceClient:
             result = self.languageServiceClient.analyze_conversation(
@@ -28,8 +29,8 @@ class LanguageConversationAnalyzer:
                         "isLoggingEnabled": False
                     },
                     "parameters": {
-                        "projectName": "Shipfer-bot-language",
-                        "deploymentName": "v0.8",
+                        "projectName": "shipfer-language-cognition",
+                        "deploymentName": "v.01",
                         "verbose": True
                     }
                 }

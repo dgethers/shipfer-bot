@@ -21,27 +21,26 @@ class LanguageConversationAnalyzer:
     # todo: create env property for deploymentName, and projectName
     # todo: set threshold for confidence
     def get_intent_and_entities(self, text: str) -> (str, dict[str: str]):
-        with self.languageServiceClient:
-            result = self.languageServiceClient.analyze_conversation(
-                task={
-                    "kind": "Conversation",
-                    "analysisInput": {
-                        "conversationItem": {
-                            "participantId": "1",
-                            "id": "1",
-                            "modality": "text",
-                            "language": "en",
-                            "text": text
-                        },
-                        "isLoggingEnabled": False
+        result = self.languageServiceClient.analyze_conversation(
+            task={
+                "kind": "Conversation",
+                "analysisInput": {
+                    "conversationItem": {
+                        "participantId": "1",
+                        "id": "1",
+                        "modality": "text",
+                        "language": "en",
+                        "text": text
                     },
-                    "parameters": {
-                        "projectName": "shipfer-language-cognition",
-                        "deploymentName": "v.03",
-                        "verbose": True
-                    }
+                    "isLoggingEnabled": False
+                },
+                "parameters": {
+                    "projectName": "shipfer-language-cognition",
+                    "deploymentName": "v.03",
+                    "verbose": True
                 }
-            )
+            }
+        )
 
         self.logger.debug(f'top intent: {result["result"]["prediction"]["topIntent"]}')
         self.logger.debug(f'confidence score of the top intent: '

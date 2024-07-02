@@ -52,9 +52,9 @@ class ShipmentInfoBot(ActivityHandler):
     async def on_message_activity(self, turn_context: TurnContext):
 
         # flow = await self.flow_accessor.get(turn_context, ShipmentConversationalFlow)
-        user_shipment_questions = await self.user_shipment_question_accessor.get(turn_context, ShipmentQuestionAnswers)
+        # user_shipment_questions = await self.user_shipment_question_accessor.get(turn_context, ShipmentQuestionAnswers)
 
-        intent = self.language_conversation_analyzer.get_intent(turn_context.activity.text)
+        intent, entities = self.language_conversation_analyzer.get_intent(turn_context.activity.text)
         self.logger.debug(f'Intent: {intent}')
 
         # todo: determine if this is needed
@@ -65,10 +65,12 @@ class ShipmentInfoBot(ActivityHandler):
             # shipments = self.shipment_processor.get_shipments()
             shipments = []
             self.logger.debug(f'returned shipments: {shipments}')
+            self.logger.debug(f'entities: {entities}')
             await turn_context.send_activity(MessageFactory.text(str(shipments)))
         elif intent == Intents.SEARCH_SHIPMENTS:
-            print(f'user_shipment_questions -> {str(user_shipment_questions)}')
+            # print(f'user_shipment_questions -> {str(user_shipment_questions)}')
             await turn_context.send_activity(MessageFactory.text("filtered shipments"))
+            self.logger.debug(f'entities: {entities}')
 
     async def on_members_added_activity(
             self,

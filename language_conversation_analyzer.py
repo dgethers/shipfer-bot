@@ -1,5 +1,8 @@
 # import libraries
+from __future__ import annotations
+
 import os
+from datetime import datetime
 from typing import Dict
 
 from azure.core.credentials import AzureKeyCredential
@@ -51,18 +54,20 @@ class LanguageConversationAnalyzer:
 
     # todo: provide type for result
     @staticmethod
-    def _get_entities(analysis_result) -> Dict[str, str]:
+    def _get_entities(analysis_result) -> Dict[str, str | datetime]:
         entities = {}
 
         for entity in analysis_result["result"]["prediction"]["entities"]:
-            category = entity["category"]
-            text = ''
+            key = entity["category"]
+            value = ''
             resolution = entity["resolutions"][0]
 
             if resolution["resolutionKind"] == 'TemporalSpanResolution':
-                text = resolution["timex"]
+                date_string = resolution["timex"]
+                date_format = '%Y-%m-%d'
+                value = datetime.strptime(date_string, date_format)
 
-            entities[category] = text
+            entities[key] = value
 
         return entities
 

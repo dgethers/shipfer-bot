@@ -19,7 +19,6 @@ class LanguageConversationAnalyzer:
         self.logger = logging.getLogger(__name__)
 
     # todo: create env property for deploymentName, and projectName
-    # todo: set threshold for confidence
     def get_intent_and_entities(self, text: str) -> (str, dict[str: str]):
         result = self.languageServiceClient.analyze_conversation(
             task={
@@ -71,5 +70,9 @@ class LanguageConversationAnalyzer:
         return entities
 
     @staticmethod
-    def _get_top_intent(result) -> str:
-        return result["result"]["prediction"]["topIntent"]
+    def _get_top_intent(result) -> str | None:
+        confidence_score = result["result"]["prediction"]["intents"][0]["confidenceScore"]
+        if confidence_score >= .90:
+            return result["result"]["prediction"]["topIntent"]
+        else:
+            return None

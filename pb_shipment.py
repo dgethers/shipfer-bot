@@ -1,12 +1,17 @@
+from typing import Protocol
+
 import requests
 import datetime
 import base64
 import cachetools.func
 import logging
 
+from fake_shipment_processor import ShipmentProcessor
+
 logging.basicConfig(level=logging.DEBUG)
 
-class PitneyBowesShipmentProcessor:
+
+class PitneyBowesShipmentProcessor(ShipmentProcessor):
     shipment_url = 'https://api-sandbox.sendpro360.pitneybowes.com/shipping/api/v1/shipments'
     token_url = "https://api-sandbox.sendpro360.pitneybowes.com/auth/api/v1/token"
 
@@ -16,7 +21,7 @@ class PitneyBowesShipmentProcessor:
         self.logger = logging.getLogger(__name__)
 
     def get_shipments(self, start_date: datetime = None, end_date: datetime = None):
-        access_token = self.get_access_token()
+        access_token = self._get_access_token()
         headers = {
             "Authorization": f"Bearer {access_token}"
         }
@@ -35,7 +40,7 @@ class PitneyBowesShipmentProcessor:
         return response.json().get('data')
 
     @cachetools.func.ttl_cache(ttl=60 * 60 * 3)
-    def get_access_token(self):
+    def _get_access_token(self):
         self.logger.info("Getting fresh access token")
         auth_string = f"{self.client_id}:{self.client_secret}"
         encoded_auth = base64.b64encode(auth_string.encode())

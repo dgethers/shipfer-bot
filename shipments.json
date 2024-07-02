@@ -1,0 +1,147 @@
+{
+  "shipments": [
+    {
+      "correlationId": "5471c111c60e4b1f9410a434caf3fbd2",
+      "create_date": "2024-02-02",
+      "fromAddress": {
+        "addressLine1": "1775 Freshour Circle",
+        "addressLine2": "",
+        "addressLine3": "",
+        "cityTown": "San Antonio",
+        "company": "Cabbage Corp",
+        "countryCode": "US",
+        "email": "info@cabbagecorp.com",
+        "name": "Cabbage Guy",
+        "phone": "210-288-5274",
+        "postalCode": "78258",
+        "residential": false,
+        "stateProvince": ""
+      },
+      "parcel": {
+        "height": 1,
+        "length": 2,
+        "width": 1,
+        "dimUnit": "IN",
+        "weightUnit": "OZ",
+        "weight": 1
+      },
+      "metadata": [
+        {
+          "name": "costAccountName",
+          "value": "test"
+        }
+      ],
+      "parcelTrackingNumber": "EP863905659US",
+      "rate": {
+        "baseCharge": 53.07,
+        "carrier": "USPS",
+        "currencyCode": "USD",
+        "parcelType": "LGENV",
+        "rateTypeId": "CONTRACT_RATES",
+        "serviceId": "EMI",
+        "specialServices": [
+          {
+            "fee": 0,
+            "inputParameters": [
+              {
+                "name": "INPUT_VALUE",
+                "value": "10"
+              }
+            ],
+            "specialServiceId": "Ins"
+          }
+        ],
+        "totalCarrierCharge": 53.07
+      },
+      "service": "EMI",
+      "shipmentId": "USPS2200579576496921",
+      "status": "COMPLETE",
+      "toAddress": {
+        "addressLine1": "2643 Roane Avenue",
+        "addressLine2": "",
+        "addressLine3": "",
+        "cityTown": "Annapolis",
+        "company": "",
+        "countryCode": "US",
+        "email": "sender1@yopmail.com",
+        "name": "Paucal",
+        "phone": "301-261-2218",
+        "postalCode": "21401",
+        "residential": true,
+        "stateProvince": ""
+      }
+    },
+        {
+      "correlationId": "e653ff48edb6ebb8916d6fcae98d0975",
+      "create_date": "2024-06-06",
+      "fromAddress": {
+        "addressLine1": "3729 Bobcat Drive",
+        "addressLine2": "",
+        "addressLine3": "",
+        "cityTown": "Bloomfield Township",
+        "company": "",
+        "countryCode": "US",
+        "email": "df@ffs.com",
+        "name": "David Fire",
+        "phone": "248-225-6849",
+        "postalCode": "48302",
+        "residential": true,
+        "stateProvince": "MI"
+      },
+      "parcel": {
+        "height": 1,
+        "length": 2,
+        "width": 1,
+        "dimUnit": "IN",
+        "weightUnit": "OZ",
+        "weight": 1
+      },
+      "metadata": [
+        {
+          "name": "costAccountName",
+          "value": "test"
+        }
+      ],
+      "parcelTrackingNumber": "EP749905659US",
+      "rate": {
+        "baseCharge": 51.07,
+        "carrier": "USPS",
+        "currencyCode": "USD",
+        "parcelType": "LGENV",
+        "rateTypeId": "CONTRACT_RATES",
+        "serviceId": "EMI",
+        "specialServices": [
+          {
+            "fee": 0,
+            "inputParameters": [
+              {
+                "name": "INPUT_VALUE",
+                "value": "10"
+              }
+            ],
+            "specialServiceId": "Ins"
+          }
+        ],
+        "totalCarrierCharge": 51.07
+      },
+      "service": "EMI",
+      "shipmentId": "USPS2200579576411111",
+      "status": "IN_PROGRESS",
+      "toAddress": {
+        "addressLine1": "1542 Grim Avenue",
+        "addressLine2": "",
+        "addressLine3": "",
+        "cityTown": "San Digo",
+        "company": "",
+        "countryCode": "US",
+        "email": "sender2@yopmail.com",
+        "name": "Korra",
+        "phone": "619-687-9445",
+        "postalCode": "92101",
+        "residential": true,
+        "stateProvince": "CA"
+      }
+    }
+
+  ]
+}

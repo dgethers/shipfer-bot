@@ -16,6 +16,7 @@ from botbuilder.core import (
 from data_models import ShipmentQuestions, ShipmentQuestionAnswers, ShipmentConversationalFlow, Intents, Entities
 
 import config
+from fake_shipment_processor import ShipmentProcessor
 from language_conversation_analyzer import LanguageConversationAnalyzer
 from pb_shipment import PitneyBowesShipmentProcessor
 
@@ -27,7 +28,7 @@ class ShipmentInfoBot(ActivityHandler):
 
     def __init__(self, user_state: UserState, conversation_state: ConversationState,
                  language_conversation_analyzer: LanguageConversationAnalyzer,
-                 shipment_processor: PitneyBowesShipmentProcessor):
+                 shipment_processor: ShipmentProcessor):
 
         if conversation_state is None:
             raise TypeError(
@@ -62,15 +63,13 @@ class ShipmentInfoBot(ActivityHandler):
         # await self.user_state.save_changes(turn_context)
 
         if intent == Intents.SEARCH_ALL_SHIPMENTS:
-            shipments = []
-            # shipments = self.shipment_processor.get_shipments()
+            shipments = self.shipment_processor.get_shipments()
             self.logger.debug(f'returned shipments: {shipments}')
             self.logger.debug(f'entities: {entities}')
             await turn_context.send_activity(MessageFactory.text(str(shipments)))
         elif intent == Intents.SEARCH_SHIPMENTS:
             self.logger.debug(f'entities: {entities}')
-            shipments = []
-            # shipments = self.shipment_processor.get_shipments(entities[Entities.START_DATE], entities[Entities.END_DATE])
+            shipments = self.shipment_processor.get_shipments(entities[Entities.START_DATE], entities[Entities.END_DATE])
             await turn_context.send_activity(MessageFactory.text(str(shipments)))
 
     async def on_members_added_activity(

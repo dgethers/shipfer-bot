@@ -17,8 +17,7 @@ class LanguageConversationAnalyzer:
 
     # todo: create env property for deploymentName, and projectName
     # todo: set threshold for confidence
-    # todo: rename function
-    def get_intent(self, text: str) -> (str, dict[str: str]):
+    def get_intent_and_entities(self, text: str) -> (str, dict[str: str]):
         with self.languageServiceClient:
             result = self.languageServiceClient.analyze_conversation(
                 task={

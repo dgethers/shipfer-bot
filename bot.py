@@ -54,7 +54,7 @@ class ShipmentInfoBot(ActivityHandler):
         # flow = await self.flow_accessor.get(turn_context, ShipmentConversationalFlow)
         # user_shipment_questions = await self.user_shipment_question_accessor.get(turn_context, ShipmentQuestionAnswers)
 
-        intent, entities = self.language_conversation_analyzer.get_intent(turn_context.activity.text)
+        intent, entities = self.language_conversation_analyzer.get_intent_and_entities(turn_context.activity.text)
         self.logger.debug(f'Intent: {intent}')
 
         # todo: determine if this is needed

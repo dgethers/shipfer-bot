@@ -13,7 +13,7 @@ from botbuilder.core import (
     MessageFactory,
 )
 
-from data_models import ShipmentQuestions, ShipmentQuestionAnswers, ShipmentConversationalFlow, Intents
+from data_models import ShipmentQuestions, ShipmentQuestionAnswers, ShipmentConversationalFlow, Intents, Entities
 
 import config
 from language_conversation_analyzer import LanguageConversationAnalyzer
@@ -62,15 +62,16 @@ class ShipmentInfoBot(ActivityHandler):
         # await self.user_state.save_changes(turn_context)
 
         if intent == Intents.SEARCH_ALL_SHIPMENTS:
-            # shipments = self.shipment_processor.get_shipments()
             shipments = []
+            # shipments = self.shipment_processor.get_shipments()
             self.logger.debug(f'returned shipments: {shipments}')
             self.logger.debug(f'entities: {entities}')
             await turn_context.send_activity(MessageFactory.text(str(shipments)))
         elif intent == Intents.SEARCH_SHIPMENTS:
-            # print(f'user_shipment_questions -> {str(user_shipment_questions)}')
-            await turn_context.send_activity(MessageFactory.text("filtered shipments"))
             self.logger.debug(f'entities: {entities}')
+            shipments = []
+            # shipments = self.shipment_processor.get_shipments(entities[Entities.START_DATE], entities[Entities.END_DATE])
+            await turn_context.send_activity(MessageFactory.text(str(shipments)))
 
     async def on_members_added_activity(
             self,

@@ -9,6 +9,11 @@ class ShipmentQuestions(Enum):
     NONE = 4
 
 
+class Entities(StrEnum):
+    START_DATE = 'StartDate'
+    END_DATE = 'EndDate'
+
+
 class Intents(StrEnum):
     CREATE_SHIPMENTS = 'CreateShipments',
     SEARCH_ALL_SHIPMENTS = 'ViewAllShipments',

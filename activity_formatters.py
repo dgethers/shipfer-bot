@@ -6,6 +6,7 @@ class ShipmentFormatter:
         for shipment in shipments:
             tokens.append(f'**{shipment["shipmentId"]}**')
             tokens.append(f' *status: {shipment["status"]}*')
+            tokens.append(f' *shipment create date: {shipment["create_date"]}*')
             to_address = shipment["toAddress"]
             tokens.append(f' {ShipmentFormatter._format_shipment_address(to_address)} ')
 

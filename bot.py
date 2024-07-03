@@ -43,8 +43,11 @@ class ShipmentInfoBot(ActivityHandler):
             await turn_context.send_activity(text)
         elif intent == Intents.SEARCH_SHIPMENTS:
             self.logger.debug(f'entities: {entities}')
-            shipments = self.shipment_processor.get_shipments(entities[Entities.START_DATE], entities[Entities.END_DATE])
-            await turn_context.send_activity(MessageFactory.text(str(shipments)))
+            shipments = self.shipment_processor.get_shipments(entities[Entities.START_DATE],
+                                                              entities[Entities.END_DATE])
+            filter_text = MessageFactory.text(ShipmentFormatter.format_shipments_to_markdown(shipments))
+            filter_text.text_format = TextFormatTypes.markdown
+            await turn_context.send_activity(filter_text)
 
     async def on_members_added_activity(
             self,

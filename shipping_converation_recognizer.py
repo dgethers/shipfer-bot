@@ -50,7 +50,6 @@ class ShippingRecognizer:
 
         return top_intent, entities
 
-    # todo: provide type for result
     @staticmethod
     def _get_entities(analysis_result) -> Dict[str, str | datetime]:
         entities = {}

@@ -3,14 +3,14 @@
 
 import sys
 import traceback
-from datetime import datetime
+from datetime import datetime, timezone
 
 from aiohttp import web
 from aiohttp.web import Request, Response, json_response
 from botbuilder.core import (
     BotFrameworkAdapterSettings,
     TurnContext,
-    BotFrameworkAdapter, MemoryStorage, UserState, ConversationState,
+    BotFrameworkAdapter,
 )
 from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes
@@ -19,8 +19,7 @@ import config
 from bot import ShipmentInfoBot
 from config import DefaultConfig
 from fake_shipment_processor import FakeShipmentProcessor
-from language_conversation_analyzer import ShippingRecognizer
-from pb_shipment import PitneyBowesShipmentProcessor
+from shipping_converation_recognizer import ShippingRecognizer
 
 CONFIG = DefaultConfig()
 
@@ -31,11 +30,11 @@ ADAPTER = BotFrameworkAdapter(SETTINGS)
 
 
 # Catch-all for errors.
-async def on_error(context: TurnContext, error: Exception):
+async def on_error(context: TurnContext, context_error: Exception):
     # This check writes out errors to console log .vs. app insights.
     # NOTE: In production environment, you should consider logging this to Azure
     #       application insights.
-    print(f"\n [on_turn_error] unhandled error: {error}", file=sys.stderr)
+    print(f"\n [on_turn_error] unhandled error: {context_error}", file=sys.stderr)
     traceback.print_exc()
 
     # Send a message to the user
@@ -49,9 +48,9 @@ async def on_error(context: TurnContext, error: Exception):
         trace_activity = Activity(
             label="TurnError",
             name="on_turn_error Trace",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             type=ActivityTypes.trace,
-            value=f"{error}",
+            value=f"{context_error}",
             value_type="https://www.botframework.com/schemas/error",
         )
         # Send a trace activity, which will be displayed in Bot Framework Emulator
@@ -60,17 +59,12 @@ async def on_error(context: TurnContext, error: Exception):
 
 ADAPTER.on_turn_error = on_error
 
-# Setup memory
-MEMORY = MemoryStorage()
-USER_STATE = UserState(MEMORY)
-CONVERSATION_STATE = ConversationState(MEMORY)
-
 shipping_recognizer = ShippingRecognizer(config.DefaultConfig.LS_CONVERSATIONS_ENDPOINT,
                                          config.DefaultConfig.LS_CONVERSATIONS_KEY)
 shipment_processor = FakeShipmentProcessor('shipments.json')
 
 # Create the Bot
-BOT = ShipmentInfoBot(USER_STATE, CONVERSATION_STATE, shipping_recognizer, shipment_processor)
+BOT = ShipmentInfoBot(shipping_recognizer, shipment_processor)
 
 
 # Listen for incoming requests on /api/messages

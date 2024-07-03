@@ -12,7 +12,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 
-class LanguageConversationAnalyzer:
+class ShippingRecognizer:
     def __init__(self, language_service_endpoint: str, language_service_key: str):
         self.languageServiceClient = ConversationAnalysisClient(language_service_endpoint,
                                                                 AzureKeyCredential(language_service_key))

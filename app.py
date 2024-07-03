@@ -19,7 +19,7 @@ import config
 from bot import ShipmentInfoBot
 from config import DefaultConfig
 from fake_shipment_processor import FakeShipmentProcessor
-from language_conversation_analyzer import LanguageConversationAnalyzer
+from language_conversation_analyzer import ShippingRecognizer
 from pb_shipment import PitneyBowesShipmentProcessor
 
 CONFIG = DefaultConfig()
@@ -65,13 +65,12 @@ MEMORY = MemoryStorage()
 USER_STATE = UserState(MEMORY)
 CONVERSATION_STATE = ConversationState(MEMORY)
 
-# todo: rename these?
-lca = LanguageConversationAnalyzer(config.DefaultConfig.LS_CONVERSATIONS_ENDPOINT,
-                                   config.DefaultConfig.LS_CONVERSATIONS_KEY)
+shipping_recognizer = ShippingRecognizer(config.DefaultConfig.LS_CONVERSATIONS_ENDPOINT,
+                                         config.DefaultConfig.LS_CONVERSATIONS_KEY)
 shipment_processor = FakeShipmentProcessor('shipments.json')
 
 # Create the Bot
-BOT = ShipmentInfoBot(USER_STATE, CONVERSATION_STATE, lca, shipment_processor)
+BOT = ShipmentInfoBot(USER_STATE, CONVERSATION_STATE, shipping_recognizer, shipment_processor)
 
 
 # Listen for incoming requests on /api/messages

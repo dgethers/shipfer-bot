@@ -68,7 +68,7 @@
         "phone": "301-261-2218",
         "postalCode": "21401",
         "residential": true,
-        "stateProvince": ""
+        "stateProvince": "MI"
       }
     },
         {
@@ -131,7 +131,7 @@
         "addressLine1": "1542 Grim Avenue",
         "addressLine2": "",
         "addressLine3": "",
-        "cityTown": "San Digo",
+        "cityTown": "San Diego",
         "company": "",
         "countryCode": "US",
         "email": "sender2@yopmail.com",

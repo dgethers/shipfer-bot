@@ -2,7 +2,8 @@
 # Licensed under the MIT License.
 
 from botbuilder.core import ActivityHandler, TurnContext
-from botbuilder.schema import ChannelAccount
+from botbuilder.schema import ChannelAccount, TextFormatTypes
+from activity_formatters import ShipmentFormatter
 import logging
 
 from botbuilder.core import (
@@ -17,7 +18,7 @@ from data_models import ShipmentQuestions, ShipmentQuestionAnswers, ShipmentConv
 
 import config
 from fake_shipment_processor import ShipmentProcessor
-from language_conversation_analyzer import LanguageConversationAnalyzer
+from language_conversation_analyzer import ShippingRecognizer
 from pb_shipment import PitneyBowesShipmentProcessor
 
 logging.basicConfig(level=logging.DEBUG)
@@ -27,7 +28,7 @@ class ShipmentInfoBot(ActivityHandler):
     # See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
 
     def __init__(self, user_state: UserState, conversation_state: ConversationState,
-                 language_conversation_analyzer: LanguageConversationAnalyzer,
+                 language_conversation_analyzer: ShippingRecognizer,
                  shipment_processor: ShipmentProcessor):
 
         if conversation_state is None:
@@ -66,7 +67,9 @@ class ShipmentInfoBot(ActivityHandler):
             shipments = self.shipment_processor.get_shipments()
             self.logger.debug(f'returned shipments: {shipments}')
             self.logger.debug(f'entities: {entities}')
-            await turn_context.send_activity(MessageFactory.text(str(shipments)))
+            text = MessageFactory.text(ShipmentFormatter.format_shipments_to_markdown(shipments))
+            text.text_format = TextFormatTypes.markdown
+            await turn_context.send_activity(text)
         elif intent == Intents.SEARCH_SHIPMENTS:
             self.logger.debug(f'entities: {entities}')
             shipments = self.shipment_processor.get_shipments(entities[Entities.START_DATE], entities[Entities.END_DATE])

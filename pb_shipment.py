@@ -1,10 +1,9 @@
-from typing import Protocol
-
-import requests
-import datetime
 import base64
-import cachetools.func
+import datetime
 import logging
+
+import cachetools.func
+import requests
 
 from fake_shipment_processor import ShipmentProcessor
 

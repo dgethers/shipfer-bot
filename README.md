@@ -4,16 +4,24 @@ Bot to get shipping information from Pitney Bowes System
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and echoes it back.
 
-## Prerequisites
+## Requirements
 
-This sample **requires** prerequisites in order to run.
+The project was created with Python version _3.12_. It **should** be compatible with version _3.8_.
 
-### Install Python 3.6
+## Creating a local virtualenv (optional)
+```sh
+python3.8 -m venv .venv && source .venv/bin/activate
+```
 
-## Running the sample
+## Running the app
 - Run `pip install -r requirements.txt` to install all dependencies
 - Run `python app.py`
 
+## Makefile
+`make run`  Run app
+`make setup` Install dependencies
+`make clean` Delete cache files
+`make compress` Zip the contents to be deployed to Azure
 
 ## Testing the bot using Bot Framework Emulator
 

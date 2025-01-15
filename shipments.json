@@ -141,7 +141,148 @@
         "residential": true,
         "stateProvince": "CA"
       }
+    },
+{
+  "correlationId": "a123ff48edb6ebb8916d6fcae98d0987",
+  "create_date": "2024-07-15",
+  "fromAddress": {
+    "addressLine1": "1234 Elm Street",
+    "addressLine2": "",
+    "addressLine3": "",
+    "cityTown": "Springfield",
+    "company": "Acme Corp",
+    "countryCode": "US",
+    "email": "contact@acmecorp.com",
+    "name": "John Doe",
+    "phone": "555-123-4567",
+    "postalCode": "62704",
+    "residential": false,
+    "stateProvince": "IL"
+  },
+  "parcel": {
+    "height": 2,
+    "length": 3,
+    "width": 2,
+    "dimUnit": "IN",
+    "weightUnit": "OZ",
+    "weight": 2
+  },
+  "metadata": [
+    {
+      "name": "costAccountName",
+      "value": "business"
     }
-
+  ],
+  "parcelTrackingNumber": "EP123456789US",
+  "rate": {
+    "baseCharge": 45.00,
+    "carrier": "USPS",
+    "currencyCode": "USD",
+    "parcelType": "BOX",
+    "rateTypeId": "CONTRACT_RATES",
+    "serviceId": "PRIORITY",
+    "specialServices": [
+      {
+        "fee": 0,
+        "inputParameters": [
+          {
+            "name": "INPUT_VALUE",
+            "value": "5"
+          }
+        ],
+        "specialServiceId": "Fragile"
+      }
+    ],
+    "totalCarrierCharge": 45.00
+  },
+  "service": "PRIORITY",
+  "shipmentId": "USPS2200579576422222",
+  "status": "COMPLETE",
+  "toAddress": {
+    "addressLine1": "5678 Oak Street",
+    "addressLine2": "",
+    "addressLine3": "",
+    "cityTown": "Metropolis",
+    "company": "",
+    "countryCode": "US",
+    "email": "receiver1@yopmail.com",
+    "name": "Jane Smith",
+    "phone": "555-987-6543",
+    "postalCode": "62960",
+    "residential": true,
+    "stateProvince": "IL"
+  }
+},
+    {
+  "correlationId": "b456ff48edb6ebb8916d6fcae98d0998",
+  "create_date": "2024-08-20",
+  "fromAddress": {
+    "addressLine1": "7890 Pine Street",
+    "addressLine2": "",
+    "addressLine3": "",
+    "cityTown": "Gotham",
+    "company": "Wayne Enterprises",
+    "countryCode": "US",
+    "email": "bruce@wayneenterprises.com",
+    "name": "Bruce Wayne",
+    "phone": "555-555-5555",
+    "postalCode": "10001",
+    "residential": false,
+    "stateProvince": "NY"
+  },
+  "parcel": {
+    "height": 3,
+    "length": 4,
+    "width": 3,
+    "dimUnit": "IN",
+    "weightUnit": "OZ",
+    "weight": 3
+  },
+  "metadata": [
+    {
+      "name": "costAccountName",
+      "value": "corporate"
+    }
+  ],
+  "parcelTrackingNumber": "EP987654321US",
+  "rate": {
+    "baseCharge": 60.00,
+    "carrier": "USPS",
+    "currencyCode": "USD",
+    "parcelType": "BOX",
+    "rateTypeId": "CONTRACT_RATES",
+    "serviceId": "EXPRESS",
+    "specialServices": [
+      {
+        "fee": 0,
+        "inputParameters": [
+          {
+            "name": "INPUT_VALUE",
+            "value": "20"
+          }
+        ],
+        "specialServiceId": "Insurance"
+      }
+    ],
+    "totalCarrierCharge": 60.00
+  },
+  "service": "EXPRESS",
+  "shipmentId": "USPS2200579576433333",
+  "status": "IN_PROGRESS",
+  "toAddress": {
+    "addressLine1": "123 Wayne Manor",
+    "addressLine2": "",
+    "addressLine3": "",
+    "cityTown": "Gotham",
+    "company": "",
+    "countryCode": "US",
+    "email": "alfred@wayneenterprises.com",
+    "name": "Alfred Pennyworth",
+    "phone": "555-555-5556",
+    "postalCode": "10002",
+    "residential": true,
+    "stateProvince": "NY"
+  }
+}
   ]
 }

@@ -1,13 +1,13 @@
 # import libraries
 from __future__ import annotations
 
-import os
+import logging
+import re
 from datetime import datetime
 from typing import Dict
 
-from azure.core.credentials import AzureKeyCredential
 from azure.ai.language.conversations import ConversationAnalysisClient
-import logging
+from azure.core.credentials import AzureKeyCredential
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -53,15 +53,22 @@ class ShippingRecognizer:
     @staticmethod
     def _get_entities(analysis_result) -> Dict[str, str | datetime]:
         entities = {}
+        date_format = '%Y-%m-%d'
+        date_pattern = r"\b\d{4}-\d{2}-\d{2}\b"
 
         for entity in analysis_result["result"]["prediction"]["entities"]:
             key = entity["category"]
             value = ''
-            resolution = entity["resolutions"][0]
+            entity_type = entity["extraInformation"][0]["value"]
+            date_string = entity["text"]
 
-            if resolution["resolutionKind"] == 'TemporalSpanResolution':
-                date_string = resolution["timex"]
-                date_format = '%Y-%m-%d'
+            if entity_type == 'datetime.daterange':
+                match = re.search(date_pattern, date_string)
+
+                if match:
+                    found = match.group()
+                    value = datetime.strptime(found, date_format)
+            elif entity_type == 'datetime.date':
                 value = datetime.strptime(date_string, date_format)
 
             entities[key] = value

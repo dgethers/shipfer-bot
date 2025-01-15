@@ -35,7 +35,7 @@ class ShippingRecognizer:
                 },
                 "parameters": {
                     "projectName": "shipfer-language-cognition",
-                    "deploymentName": "v.03",
+                    "deploymentName": "v.04",
                     "verbose": True
                 }
             }
